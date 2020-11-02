@@ -2,8 +2,9 @@ import os
 import speech_recognition as sr
 import pyttsx3
 import time
+import xml.etree.ElementTree as ET
 print("===================welcome_To_automation==================n")
-
+os.system("python3 custopharse.py")
 pyttsx3.speak("welcome to hybrid automation")
 print('say Partition to Create new partition')
 print('say Hadoop to configure hadoop setup')
@@ -39,7 +40,7 @@ while True:
 					print("Dont support.....")
 
 
-		elif(("hadoop" in p) or ("Hadoop" in p)) or (("open hadoop" in p) or ("run hadoop" in p)):
+		elif(("hadoop" in p) or ("Hadoop" in p)) or (("open hadoop" in p) or ("run hadoop" in p)) or (("Haadu" in p) or ("haadu" in p)):
 			os.chdir('/etc/hadoop')
 			os.system("ls")
 			print("for cluster, what You want to Make... Namenode or Datanode")
@@ -49,7 +50,7 @@ while True:
 			print("want to make namenode say...namenode")
 			print("want to make datanode say...datanode")
 			print("")
-			t = 10
+			t = 3
 			for i in range(t):
 				print(str(t - i) + "second remain" )
 				time.sleep(1)
@@ -74,12 +75,17 @@ while True:
 						print("new namenode Directory is created")
 						time.sleep(5)
 						pyttsx3.speak("wait a second we are configuring hdfs-site for you..")
-						
+						time.sleep(3)
+						print("hdfs-site is configured with new details...")
 					elif not os.path.exists('nn'):
+						import os
 						pyttsx3.speak("wait a second for the first time namenode directory is creating for you")
 						time.sleep(2)
 						os.mkdir('nn')
 						print("new Namenode Directory is Created")
+						print("wait a second we Configuring hdfs-site for you")
+						time.sleep(3)
+						print("hdfs is configured with new details")
 					else:
 						print("dont support")
 						time.sleep(5)
@@ -104,7 +110,6 @@ while True:
 						os.mkdir('dn')
 						pyttsx3.speak("directroy is created")
 						print("new datanode directory is created")
-					
 				else:
 					print("dont support")
 		else:
