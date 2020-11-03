@@ -5,6 +5,7 @@ import time
 import xml.etree.ElementTree as ET
 print("===================welcome_To_automation==================n")
 os.system("python3 custopharse.py")
+os.system("python3 cutsopharse2.py")
 pyttsx3.speak("welcome to hybrid automation")
 print('say Partition to Create new partition')
 print('say Hadoop to configure hadoop setup')
@@ -17,6 +18,7 @@ while True:
 		print("speech done..")
 		p = r.recognize_google(audio)
 		print("you said..  " + p) 
+		pyttsx3.speak("you says %s"%p)
 		if(("Partition" in p) or ("partition" in p)) or (("create Partition for me" in p) or ("Create Partition For Me" in p)) :
 			print("Input your device name : i.e. /dev/sdb")
 			pyttsx3.speak("tell your device name")
@@ -40,7 +42,7 @@ while True:
 					print("Dont support.....")
 
 
-		elif(("hadoop" in p) or ("Hadoop" in p)) or (("open hadoop" in p) or ("run hadoop" in p)) or (("Haadu" in p) or ("haadu" in p)):
+		elif(("hadoop" in p) or ("Hadoop" in p)) or(("hey os can you open hadoop for me" in p)or("Can You Open Hadoop For Me" in p)) or (("open hadoop" in p) or ("run hadoop" in p)) or (("Haadu" in p) or ("haadu" in p)):
 			os.chdir('/etc/hadoop')
 			os.system("ls")
 			print("for cluster, what You want to Make... Namenode or Datanode")
@@ -77,6 +79,19 @@ while True:
 						pyttsx3.speak("wait a second we are configuring hdfs-site for you..")
 						time.sleep(3)
 						print("hdfs-site is configured with new details...")
+						pyttsx3.speak("wait a second we are configuring core-site for you..")
+						print("wait a second we are configuring core-site for you..")
+						time.sleep(3)
+						print("core-site is configured with new details...")
+						print("wait namenode Formating for the first time...")
+						os.system("hadoop namenode -format")
+						time.sleep(3)
+						print("namenode is successfully formated")
+						print("namenode service is starting wait....")
+						time.sleep(3)
+						os.system("hadoop-daemon.sh start namenode")
+						os.system("jps")
+						print("namenode service is started")
 					elif not os.path.exists('nn'):
 						import os
 						pyttsx3.speak("wait a second for the first time namenode directory is creating for you")
