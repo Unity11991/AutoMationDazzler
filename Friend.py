@@ -230,7 +230,7 @@ while True:
 										p = r.recognize_google(audio)
 										pyttsx3.speak("i got it you said: %s" %p)
 										print("you said: " + p)
-										if(("latest" in p) or ("Lates" in p)):
+										if(("latest" in p) or ("Latest" in p)):
 											pyttsx3.speak("wait i am launing your image")
 											time.sleep(2)
 											os.system("docker run debian:latest")
@@ -241,10 +241,10 @@ while True:
 											pyttsx3.speak("these are the running containers you have")
 											pyttsx3.speak("wait you are landing to the bebian terminal..")
 											os.system("docker run -it debian:latest")
-							if(("fedora" in p) or ("Fedora" in p)):
+							elif(("fedora" in p) or ("Fedora" in p)):
 								print("\n\n")
 								print("tell me Tag Of Image(Version)")
-								pyttsx3.speak("hey user i want to know Tag of image tell me")
+								pyttsx3.speak("hey user i want to know Tag of image.. tell me")
 								while True:
 									with sr.Microphone() as source:
 										r.adjust_for_ambient_noise(source)
@@ -255,7 +255,7 @@ while True:
 										pyttsx3.speak("i got it you said: %s" %p)
 										print("you said:" + p)
 										if(("latest" in p) or ("Latest" in p)):
-											pyttsx3.speak("wait we i am launching your Image")
+											pyttsx3.speak("wait i am launching your Image")
 											time.sleep(2)
 											os.system("docker run fedora:latest")
 											pyttsx3.speak("Fedora is Running")
@@ -265,7 +265,30 @@ while True:
 											pyttsx3.speak("these are the running containers you have")
 											pyttsx3.speak("wait you are landing to the bebian terminal..")
 											os.system("docker run -it fedora:latest")
-
+							elif(("ubuntu" in p) or ("Ubuntu" in p)):
+								print("\n\n")
+								print("tell me Tag Of Image(Version)")
+								pyttsx3.speak("hey user i want to know Tag of image.. tell me")
+								while True:
+									with sr.Microphone() as source:
+										r.aadjust_for_ambient_noise(source)
+										print("start say..")
+										audio = r.listen(source)
+										print("speech done..")
+										p = r.recognize_google(audio)
+										pyttsx3.speak("i got it you said: %s" %p)
+										print("you said:" + p)
+										if(("latest" in p) or ("Latest" in p)):
+											pyttsx3.speak("wait i am launching your image")
+											time.sleep(2)
+											os.system("docker run ubuntu:14.04")
+											pyttsx3.speak("Ubuntu is running")
+											print("\n\n\n")
+											os.system("tput setaf 9")
+											os.system("docker ps -a")
+											pyttsx3.speak("these are the running containers you have")
+											pyttsx3.speak("wait you are landing to the bebian terminal")
+											os.system("docker run -it ubuntu:14.04")
 				else:
 					print("dont support")
 			print("\n\n\n")
