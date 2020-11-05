@@ -2,11 +2,13 @@ import os
 import speech_recognition as sr
 import pyttsx3
 import time
+import keyboard
 import xml.etree.ElementTree as ET
 print("===================welcome_To_automation==================n")
 os.system("python3 custopharse.py")
 os.system("python3 cutsopharse2.py")
 pyttsx3.speak("welcome to hybrid automation")
+print('say docker to start docker service')
 print('say Partition to Create new partition')
 print('say Hadoop to configure hadoop setup')
 r = sr.Recognizer()
@@ -86,12 +88,16 @@ while True:
 						print("wait namenode Formating for the first time...")
 						os.system("hadoop namenode -format")
 						time.sleep(3)
+						keyboard.press_and_release('n, enter')
 						print("namenode is successfully formated")
+						pyttsx3.speak("nanenode service is starting wait a second")
 						print("namenode service is starting wait....")
 						time.sleep(3)
 						os.system("hadoop-daemon.sh start namenode")
 						os.system("jps")
+						pyttsx3.speak("Namenode service is started")
 						print("namenode service is started")
+						system.os("quit")
 					elif not os.path.exists('nn'):
 						import os
 						pyttsx3.speak("wait a second for the first time namenode directory is creating for you")
@@ -127,5 +133,79 @@ while True:
 						print("new datanode directory is created")
 				else:
 					print("dont support")
+		elif(("docker" in p) or ("Docker" in p)) or (("open docker" in p) or ("Open Docker" in p)):
+			pyttsx3.speak("wait a second Docker is starting")
+			os.system("systemctl start docker")
+			time.sleep(2)
+			print("docker is running..")
+			print("wait a second sowing all installed containers..")
+			time.sleep(2)
+			print("______________installed Containers_____________")
+			os.system("docker ps -a")
+			os.system("tput setaf 5")
+			pyttsx3.speak("hey user showing all function that you can do in docker")
+			os.system("tput setaf 6")
+			print("__________these are the function in docker that you can do___________")
+			os.system("tput setaf 8")
+			print("if you want to download Image:.. say hey OS i want to download Image")
+			print("if you want to list running containers...say hey OS i want to list running containers")
+			with sr.Microphone() as source:
+				r.adjust_for_ambient_noise(source)
+				print("start say...")
+				audio = r.listen(source)
+				print("speech done...")
+				p = r.recognize_google(audio)
+				print("you said.." + p)
+				pyttsx3.speak("you said %s"%p)
+				pyttsx3.speak("these are the latest available image for download")
+				os.system("tput setaf 3")
+				print("\n\n")
+				print("__________________Debian__________________")
+				print("__________________fedora__________________")
+				print("__________________Ubuntu_________________\n\n")
+				print("tell me Which OS you want to download\n\n")
+				pyttsx3.speak("tell me what do you want to download")
+				t = 5
+				for i in range(t):
+					print(str(t - i) + "second remain" )
+					time.sleep(1)
+				with sr.Microphone() as source:
+					r.adjust_for_ambient_noise(source)
+					print("start say...")
+					audio = r.listen(source)
+					print("speech done...")
+					p = r.recognize_google(audio)
+					print("you said:" + p)
+					pyttsx3.speak("i got it you said : %s"%p)
+					if(("debian" in p) or ("Debian" in p)) or (("download debian" in p) or ("Download Debian" in p)):
+						pyttsx3.speak("collecting resourses wait..")
+						time.sleep(2)
+						pyttsx3.speak("downloading wait")
+						print("image is downloading wait")
+						os.system("docker pull debian")
+						pyttsx3.speak("Debian is Successfully downloaded")
+						print("download successful..")
+					elif(("fedora" in p) or ("Fedora" in p)) or (("download fedora" in p) or ("Download Fedora" in p)):
+						pyttsx3.speak("collecting resourses wait..")
+						time.sleep(2)
+						pyttsx3.speak("downloading wait")
+						print("image is downloading wait")
+						os.system("docker pull fedora")
+						pyttsx3.speak("Fedora is Successfully downloaded")
+						print("download successful..")
+					elif(("ubuntu" in p) or ("Ubuntu" in p)) or (("download ubuntu" in p) or ("Download Ubuntu" in p)):
+                                                pyttsx3.speak("collecting resourses wait..")
+                                                time.sleep(2)
+                                                pyttsx3.speak("downloading wait")
+                                                print("image is downloading wait")
+                                                os.system("docker pull ubuntu:14.04")
+                                                pyttsx3.speak("Ubuntu is Successfully downloaded")
+					else:
+						print("dont support")
+				print("\n\n")
+				os.system("tput setaf 7")
+				print("______________available Images_______________\n\n")
+				os.system("docker image ls")
+
 		else:
 			print("dont support")
