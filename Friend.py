@@ -4,13 +4,16 @@ import pyttsx3
 import time
 import keyboard
 import xml.etree.ElementTree as ET
-print("===================welcome_To_automation==================n")
+
+os.system("figlet MultiAutomation")
+print("===================welcome_To_MultiAutomation==================n")
 os.system("python3 custopharse.py")
 os.system("python3 cutsopharse2.py")
 pyttsx3.speak("welcome to hybrid automation")
 print('say docker to start docker service')
 print('say Partition to Create new partition')
 print('say Hadoop to configure hadoop setup')
+print('say LVM or Local Volume Management to to create LVM Partitions')
 r = sr.Recognizer()
 while True:
 	with sr.Microphone() as source:
@@ -292,6 +295,25 @@ while True:
 				else:
 					print("dont support")
 			print("\n\n\n")
-
+		elif(("LVM" in p) or ("lvm" in p)) or (("Logical Volume Management" in p) or ("logical volume management" in p)):
+			pyttsx3.speak("Wait a second LVM is starting")
+			os.system("tput setaf 1")
+			pyttsx3.speak("Showing Available devices")
+			print("___You have these Device Available in your OS__")
+			print("\n")
+			os.system("fdisk -l")
+			print("\n\n")
+			os.system("tput setaf 8")
+			print("__These are the Partition you already have__")
+			os.system("lsblk")
+			time.sleep(3)
+			print("\n")
+			pyttsx3.speak("Enter Your Device Names we Creating Physical Volumes For you")
+			print("Enter Your First device Name (i.e /dev/sda)")
+			x = input("Enter Device : " )
+			print("Enter your Second Device name")
+			y = input("Enter Device : ")
+			print("\nYour devices are: %s" %x,y)
+			os.system("zenity --warning")
 		else:
 			print("dont support")
